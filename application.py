@@ -16,6 +16,16 @@ def read_dict()
     else:
         return dict_in
 
+# @param {}
+# @return {string} file if successful, else {boolean} False
+# Reads in file from file location specified by user, converts file to .txt if applicable
+def get_file()
+    # TODO: Get file location from user via text field in interface.py
+    # TODO: Redirect back to interface if file not found/not in correct format (.txt, .pdf, .word)
+    # TODO: Convert file to .txt if not already
+    # TODO: Read in file to variable file_in
+    # TODO: Return file_in if successful, else return False
+
 # @param {string} dictionary
 # @return {boolean} success_value
 # Loads dictionary into memory, uses node objects to construct complete trie
