@@ -8,6 +8,6 @@ class Trie(object):
         # instance variables
         i = 0
 
-    # Returns true if trie is successfully loaded into memory. Otherwise, return true
+    # Returns True if trie is successfully loaded into memory. Otherwise, returns False
     def status(self):
         return False
