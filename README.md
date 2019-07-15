@@ -7,6 +7,7 @@ Repository for the SpellCheck final project in YSP Python 2019:
 
 # Error codes:
 - 0: Successful run 
+- 1: Dictionary file failed to read into memory
 
 # Credits:
 
