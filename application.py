@@ -1,6 +1,7 @@
 """SpellChecker Main file - creates instances of classes and calls methods from 
 helper files"""
 
+import textract
 from node import *
 from interface import *
 
@@ -19,11 +20,31 @@ def read_dict()
 # @param {}
 # @return {string} file if successful, else {boolean} False
 # Reads in file from file location specified by user, converts file to .txt if applicable
-def get_file()
+# @param {fileLocation}
+# @return {string} file if successful, else {boolean} False
+# Reads in file from file location specified by user, converts file to .txt if applicable
+def get_file(fileLocation)
     # TODO: Get file location from user via text field in interface.py
     # TODO: Redirect back to interface if file not found/not in correct format (.txt, .pdf, .word)
+    dotIndex = fileLocation.rfind(".")
+    fileType = fileLocation[dotIndex:]
+    if fileType == "txt":
+        file_in = file(fileLocation, 'r')
+    elif fileType == "pdf":
+        newFile = textract.process(fileLocation, method = "pdfminer")
+        file_in = file(newFile, 'r')
+    elif fileType == "doc":
+        newFile = textract.process(fileLocation, method = "antiword")
+        file_in = file(newFile, 'r')
+    else:
+        print("Please use a valid file type")
     # TODO: Convert file to .txt if not already
     # TODO: Read in file to variable file_in
+    file_in = file(newFile, 'r')
+    if file_in.read() == "":
+        return False
+    else:
+        return True
     # TODO: Return file_in if successful, else return False
 
 # @param {string} dictionary
