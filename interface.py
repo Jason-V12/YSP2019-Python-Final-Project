@@ -18,6 +18,7 @@ class DrawInterface(object):
         self.chosenimage = PhotoImage(file = "filechosen.gif")
         self.restartimage = PhotoImage(file = "restartimage.gif")
         self.file = None
+        self.file_location = None
     #param (none)
     def make_interface(self):
         exitbtn = Button(self.top, height = 40, width = 100, image = self.exitimage, command = self.exit_interface)
@@ -37,12 +38,11 @@ class DrawInterface(object):
         try:
             filetext = open(self.file)
             filetext.read()
+            self.file_location = str(filetext).split("\'")[1]
             filetext.close()
             filelbl = Label(self.top, height = 40, width = 150, image = self.chosenimage)
             filelbl.place(x = 0, y = 0)
         except:
             print("Try again")
-        print(filetext)
+        print(self.file_location)
 
-x = DrawInterface()
-x.make_interface()
