@@ -7,14 +7,14 @@ Repository for the SpellCheck final project in YSP Python 2019:
 
 # Error codes:
 - 0: Successful run 
-- 1: Dictionary file failed to read into memory
-
+- 1: Interface failure
+- 2: Dictionary selection failure
 # Credits:
 
 This application uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
 
 EnglishDictionary.txt: 
 
-- Project: english-words https://github.com/dwyl/english-words
+Project: english-words https://github.com/dwyl/english-words
 
-- Copyright (c) 2018, Infochimps (https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-     english-words-excel-readable)
+Copyright (c) 2018, Infochimps (https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable)
