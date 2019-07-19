@@ -1,14 +1,16 @@
 from tkinter import *
 from tkinter.filedialog import askopenfilename
 
+
 class Language(object):
-    #param (self, string)
+    # param (self, string)
     def __init__(self, language):
         lang = self.language
-        #dictionary for language
+        # dictionary for language
+
 
 class DrawInterface(object):
-    #param (none)
+    # param (none)
     def __init__(self):
         self.top = Tk()
         self.top.geometry("400x600+0+0")
@@ -19,7 +21,8 @@ class DrawInterface(object):
         self.restartimage = PhotoImage(file = "restartimage.gif")
         self.file = None
         self.file_location = None
-    #param (none)
+    # param (none)
+
     def make_interface(self):
         exitbtn = Button(self.top, height = 40, width = 100, image = self.exitimage, command = self.exit_interface)
         exitbtn.place(x = 300, y = 560)
@@ -29,16 +32,18 @@ class DrawInterface(object):
         fileChoosebtn.place(x = 155, y = 0)
         restartbtn = Button(self.top, height = 40, width = 100, image = self.restartimage, command = self.make_interface)
         restartbtn.place(x = 300, y = 0)
-    #param (none)
+
+    # param (none)
     def exit_interface(self):
         self.top.destroy()
-    #param (none)
+
+    # param (none)
     def upload_file(self):
         self.file = askopenfilename(title = "Choose a file:", filetypes = (("Text File", "*.txt"), ("PDF File","*.pdf"), ("Microsoft Word Document", "*.doc*")))
         try:
             filetext = open(self.file)
             filetext.read()
-            self.file_location = str(filetext).split("\'")[1]
+            self.file_location = str(filetext).split("\'")[1].replace("/", "\\")
             filetext.close()
             filelbl = Label(self.top, height = 40, width = 150, image = self.chosenimage)
             filelbl.place(x = 0, y = 0)
