@@ -9,8 +9,16 @@ Repository for the SpellCheck final project in YSP Python 2019:
 - 0: Successful run 
 - 1: Interface failure
 - 2: Dictionary selection failure
-# Credits:
+- 3: Input file load failure
 
+# Imports: 
+ - from string import punctuation
+ - from dataclasses import dataclass
+ - from time import time
+ - from tkinter import *
+ - from tkinter.filedialog import askopenfilename
+
+# Credits:
 This application uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
 
 EnglishDictionary.txt: 
