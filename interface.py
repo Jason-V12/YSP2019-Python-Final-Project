@@ -18,7 +18,7 @@ class DrawInterface(object):
         self.germanimage = PhotoImage(file = "germanimage.gif")
         self.currentlangimage = PhotoImage(file = "currentlanguageimage.gif")
         self.logoimage = PhotoImage(file = "logo.gif")
-        self.language = English
+        self.language = "English"
         self.file = None
     #param (none)
     def make_interface(self):
