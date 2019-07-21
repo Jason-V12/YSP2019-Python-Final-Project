@@ -79,7 +79,3 @@ class DrawInterface(object):
             language = "German"
             self.curlang = Label(self.top, height=40, width=150, image=self.germanimage)
         self.curlang.place(x=200, y=160)
-        
-x = DrawInterface()
-x.make_interface()
-
