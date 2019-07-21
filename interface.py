@@ -18,6 +18,7 @@ class DrawInterface(object):
         self.germanimage = PhotoImage(file = "germanimage.gif")
         self.currentlangimage = PhotoImage(file = "currentlanguageimage.gif")
         self.logoimage = PhotoImage(file = "logo.gif")
+        self.language = English
         self.file = None
     #param (none)
     def make_interface(self):
@@ -63,15 +64,19 @@ class DrawInterface(object):
     def change_language(self, langnum):
         if langnum == 1:
             language = "English"
+            self.language = "English"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.englishimage)
         elif langnum == 2:
             language = "Spanish"
+            self.language = "Spanish"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.spanishimage)
         elif langnum == 3:
             language = "French"
+            self.language = "French"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.frenchimage)
         elif langnum == 4:
             language = "German"
+            self.language = "German"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.germanimage)
         self.curlang.place(x = 200, y = 360)
 x = DrawInterface()
