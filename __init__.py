@@ -4,6 +4,7 @@ helper files"""
 import trie
 import interface
 from string import punctuation
+from time import time
 
 
 # @param {}
@@ -34,9 +35,9 @@ def get_file():
             file_in = open(interface_instance.file_location, 'r')
             in_file = file_in.read()
             file_in.close()
-            output_file = open("READ_IN.txt", "w")
-            output_file.write(in_file)
-            output_file.close()
+            # output_file = open("READ_IN.txt", "w")
+            # output_file.write(in_file)
+            # output_file.close()
             return in_file
         else:
             print("Please use a valid file type")
@@ -48,10 +49,8 @@ def get_file():
     # TODO: Return file_in if successful, else return False
 
 
-# @param {string} dictionary
-# @return {boolean} success_value
-# Loads dictionary into memory, uses node objects to construct complete trie
 if __name__ == "__main__":
+    complete_time = time()
     interface_instance = interface.DrawInterface()
     interface_instance.make_interface()
     try:
@@ -59,16 +58,8 @@ if __name__ == "__main__":
     except AttributeError:
         exit(1)
     input_file = get_file()
+    input_file = input_file.replace("\n", " ")
     input_file = (input_file.translate(str.maketrans('', '', punctuation))).split(" ")
-    i = 0
-    length = len(input_file)
-    while i < length:
-        input_file[i] = input_file[i].replace("\n", "")
-        if input_file[i] == "":
-            input_file.remove(input_file[i])
-            length = length - 1
-            continue
-        i = i + 1
     if not input_file:
         exit(3)
     dictionary = read_dict()
@@ -76,11 +67,17 @@ if __name__ == "__main__":
     if not trie_instance.check_dict():
         exit(2)
     else:
-        print(trie_instance.add_words())
+        trie_instance.add_words()
+    spell_check_time = time()
+    miss_file = open("READ_IN.txt", "w")
     for word in range(0, len(input_file)):
-        print(input_file[word] + ": " + str(trie_instance.check_word(input_file[word])))
-    print(input_file)
-print("Completed runtime", end="")
+        if input_file[word] != "":
+            result = trie_instance.check_word(input_file[word])
+            if not result:
+                miss_file.write(input_file[word] + ": " + str(result) + "\n")
+    print("Spell Checking time in seconds: " + str(time() - spell_check_time))
+    miss_file.close()
+    print("Completed runtime in: " + str(time() - complete_time), end="")
 
 """elif file_type == "pdf":
         newFile = textract.process(fileLocation, method = "pdfminer")
