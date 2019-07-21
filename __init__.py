@@ -59,6 +59,7 @@ if __name__ == "__main__":
         exit(1)
     input_file = get_file()
     input_file = input_file.replace("\n", " ")
+    input_file = input_file.replace("\t", " ")
     input_file = (input_file.translate(str.maketrans('', '', punctuation))).split(" ")
     if not input_file:
         exit(3)
@@ -69,12 +70,13 @@ if __name__ == "__main__":
     else:
         trie_instance.add_words()
     spell_check_time = time()
-    miss_file = open("READ_IN.txt", "w")
+    miss_file = open("MisspelledWords.txt", "w")
     for word in range(0, len(input_file)):
-        if input_file[word] != "":
+        if input_file[word] != "" and not input_file[word].isnumeric():
             result = trie_instance.check_word(input_file[word])
             if not result:
-                miss_file.write(input_file[word] + ": " + str(result) + "\n")
+                miss_file.write(input_file[word] + ": " + str(result) + "   Similar: "
+                                + str(trie_instance.suggestions(input_file[word])) + "\n")
     print("Spell Checking time in seconds: " + str(time() - spell_check_time))
     miss_file.close()
     print("Completed runtime in: " + str(time() - complete_time), end="")
