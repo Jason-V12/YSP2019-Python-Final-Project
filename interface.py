@@ -20,6 +20,7 @@ class DrawInterface(object):
         self.currentlangimage = PhotoImage(file="currentlanguageimage.gif")
         self.file = None
         self.file_location = ""
+        self.language = "English"
 
     # param (none)
     def make_interface(self):
@@ -33,6 +34,7 @@ class DrawInterface(object):
         restartbtn.place(x=300, y=0)
         englishbtn = Button(self.top, height=40, width=150, image=self.englishimage,
                             command=lambda: self.change_language(1))
+
         englishbtn.place(x=0, y=50)
         spanishbtn = Button(self.top, height=40, width=150, image=self.spanishimage,
                             command=lambda: self.change_language(2))
@@ -63,19 +65,23 @@ class DrawInterface(object):
             filelbl.place(x=0, y=0)
         except:
             print("Try again")
-        print(filedir)
+        try:
+            print(filedir)
+        except UnboundLocalError:
+            print("File not obtained")
+            exit(5)
 
     def change_language(self, langnum):
         if langnum == 1:
-            language = "English"
+            self.language = "English"
             self.curlang = Label(self.top, height=40, width=150, image=self.englishimage)
         elif langnum == 2:
-            language = "Spanish"
+            self.language = "Spanish"
             self.curlang = Label(self.top, height=40, width=150, image=self.spanishimage)
         elif langnum == 3:
-            language = "French"
+            self.language = "French"
             self.curlang = Label(self.top, height=40, width=150, image=self.frenchimage)
         elif langnum == 4:
-            language = "German"
+            self.language = "German"
             self.curlang = Label(self.top, height=40, width=150, image=self.germanimage)
         self.curlang.place(x=200, y=160)
