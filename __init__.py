@@ -12,8 +12,12 @@ from time import time
 # Reads in dictionary requested from user input
 def read_dict():
     # TODO: handle different dictionaries via options in interface.py
-    dictionary_option = "EnglishDictionary.txt"
-    dict_file = open(dictionary_option, "r")
+    language = interface_instance.language
+    if language == "English":
+        dictionary_option = "EnglishDictionary.txt"
+    else:
+        dictionary_option = "EnglishDictionary.txt"
+    dictionary_option = dict_file = open(dictionary_option, "r")
     dict_in = dict_file.read()
     if dict_in == "":
         return False
@@ -30,7 +34,7 @@ def get_file():
     if interface_instance.file_location:
         dot_index = interface_instance.file_location.rfind(".")
         file_type = interface_instance.file_location[dot_index:]
-        print(file_type)
+        print("File type: " + file_type)
         if file_type == ".txt":
             file_in = open(interface_instance.file_location, 'r')
             in_file = file_in.read()
@@ -44,6 +48,7 @@ def get_file():
             return False
     else:
         print("File not obtained")
+        exit(4)
     # TODO: Convert file to .txt if not already
     # TODO: Read in file to variable file_in
     # TODO: Return file_in if successful, else return False
@@ -53,11 +58,14 @@ if __name__ == "__main__":
     complete_time = time()
     interface_instance = interface.DrawInterface()
     interface_instance.make_interface()
+    print(interface_instance.language)
+    print("Select a file to process, then select exit...\n")
     try:
         interface_instance.top.mainloop()
     except AttributeError:
         exit(1)
     input_file = get_file()
+    print("Loading...")
     input_file = input_file.replace("\n", " ")
     input_file = input_file.replace("\t", " ")
     input_file = (input_file.translate(str.maketrans('', '', punctuation))).split(" ")
@@ -79,7 +87,9 @@ if __name__ == "__main__":
                                 + str(trie_instance.suggestions(input_file[word])) + "\n")
     print("Spell Checking time in seconds: " + str(time() - spell_check_time))
     miss_file.close()
-    print("Completed runtime in: " + str(time() - complete_time), end="")
+    print("Completed runtime in seconds: " + str(time() - complete_time))
+    print("SUCCESS")
+    print("Misspelled words located in file: MisspelledWords.txt")
 
 """elif file_type == "pdf":
         newFile = textract.process(fileLocation, method = "pdfminer")
