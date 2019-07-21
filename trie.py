@@ -2,9 +2,7 @@
 navigates through trie to check spelling, uses trie to suggest similar words.
 Writes to output file."""
 
-from dataclasses import dataclass
 from time import time
-from copy import deepcopy
 
 
 # Struct-like class containing empty string array of children and boolean representing if word
@@ -23,7 +21,6 @@ class Trie(object):
         self.dict_in_use = dict_in_use
         self.word_count = 0
         self.INDEX = 0
-        self.new_node = Node()
 
     # @param {}
     # @return {boolean} True if successful, else {boolean} False
@@ -62,7 +59,7 @@ class Trie(object):
                 self.traversal_node = self.parent_node  # Point traversal node back to head node
                 self.word_count = self.word_count + 1
             elif self.traversal_node.children[self.INDEX] is None:
-                self.traversal_node.children[self.INDEX] = deepcopy(self.new_node)
+                self.traversal_node.children[self.INDEX] = Node()
                 self.traversal_node = self.traversal_node.children[self.INDEX]
             else:
                 self.traversal_node = self.traversal_node.children[self.INDEX]
@@ -104,17 +101,87 @@ class Trie(object):
                 else:
                     return False
             elif lower_word[letter].isalpha():
-                if self.traversal_node.children[ord(lower_word[letter]) - 97] is not None:
-                    self.traversal_node = self.traversal_node.children[ord(lower_word[letter]) - 97]
-                else:
+                try:
+                    if self.traversal_node.children[ord(lower_word[letter]) - 97] is not None:
+                        self.traversal_node = self.traversal_node.children[ord(lower_word[letter]) - 97]
+                    else:
+                        return False
+                except IndexError:
                     return False
             elif lower_word[letter].isnumeric():
                 if self.traversal_node.children[ord(lower_word[letter]) - 17] is not None:
                     self.traversal_node = self.traversal_node.children[ord(lower_word[letter]) - 17]
                 else:
                     return False
+            else:
+                return False
             if letter == len(lower_word) - 1:
                 if self.traversal_node.is_word is True:
                     return True
                 else:
                     return False
+
+    # @param {string} word
+    # @return {string} suggestion if found, else {boolean} False
+    # Suggests a word similar to a read-in word, if possible
+    def suggestions(self, word):
+        self.traversal_node = self.parent_node
+        flag = False
+        suggestion = ""
+        for letter in range(0, len(word)):
+            if word[letter] == "\'":
+                if self.traversal_node.children[26] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[26]
+                else:
+                    flag = True
+            elif word[letter] == "&":
+                if self.traversal_node.children[27] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[27]
+                else:
+                    flag = True
+            elif word[letter] == "-":
+                if self.traversal_node.children[28] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[28]
+                else:
+                    flag = True
+            elif word[letter] == ".":
+                if self.traversal_node.children[29] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[29]
+                else:
+                    flag = True
+            elif word[letter] == "/":
+                if self.traversal_node.children[30] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[30]
+                else:
+                    flag = True
+            elif word[letter].isalpha():
+                try:
+                    if self.traversal_node.children[ord(word[letter]) - 97] is not None:
+                        suggestion = suggestion + word[letter]
+                        self.traversal_node = self.traversal_node.children[ord(word[letter]) - 97]
+                    else:
+                        flag = True
+                except IndexError:
+                    return False
+            elif word[letter].isnumeric():
+                if self.traversal_node.children[ord(word[letter]) - 17] is not None:
+                    suggestion = suggestion + word[letter]
+                    self.traversal_node = self.traversal_node.children[ord(word[letter]) - 17]
+                else:
+                    flag = True
+            if flag:
+                break
+        for j in range(0, 15):
+            counter = 0
+            for i in range(0, 25):
+                if self.traversal_node.children[i] is not None:
+                    suggestion = suggestion + chr(97 + i)
+                    self.traversal_node = self.traversal_node.children[i]
+                    counter = counter + 1
+                    if self.traversal_node.is_word:
+                        return suggestion
