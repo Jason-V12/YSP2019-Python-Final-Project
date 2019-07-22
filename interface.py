@@ -20,6 +20,7 @@ class DrawInterface(object):
         self.logoimage = PhotoImage(file = "logo.gif")
         self.language = "English"
         self.file = None
+        self.file_location = ""
     #param (none)
     def make_interface(self):
         logolbl = Label(self.top, height = 167, width = 324, image = self.logoimage)
@@ -58,6 +59,7 @@ class DrawInterface(object):
             filedir.close()
             filelbl = Label(self.top, height = 40, width = 150, image = self.chosenimage)
             filelbl.place(x = 0, y = 200)
+            self.file_location = str(filedir).split("\'")[1].replace("/", "\\")
         except:
             if self.file == None:
                 print("Try again")
@@ -79,6 +81,3 @@ class DrawInterface(object):
             self.language = "German"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.germanimage)
         self.curlang.place(x = 200, y = 360)
-x = DrawInterface()
-x.make_interface()
-
