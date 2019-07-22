@@ -58,9 +58,13 @@ class Trie(object):
                 self.traversal_node.is_word = True
                 self.traversal_node = self.parent_node  # Point traversal node back to head node
                 self.word_count = self.word_count + 1
-            elif self.traversal_node.children[self.INDEX] is None:
-                self.traversal_node.children[self.INDEX] = Node()
-                self.traversal_node = self.traversal_node.children[self.INDEX]
+            try:
+                elif self.traversal_node.children[self.INDEX] is None:
+                    self.traversal_node.children[self.INDEX] = Node()
+                    self.traversal_node = self.traversal_node.children[self.INDEX]
+            except IndexError:
+                    print("Failure")
+                    exit(4)
             else:
                 self.traversal_node = self.traversal_node.children[self.INDEX]
         print("Dictionary load time in seconds: " + str(time() - start_time))
