@@ -5,9 +5,7 @@ class Diagnostics(object):
     def __init__(self):
         #instance variables
         i = 0
-
-    def miss_word_count(self):
-        return True
+        
     def dict_word_count(self, fileName):
         file = open(fileName, 'r')
         f = file.read()
