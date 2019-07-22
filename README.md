@@ -17,6 +17,17 @@ Repository for the SpellCheck final project in YSP Python 2019:
  - from time import time
  - from tkinter import *
  - from tkinter.filedialog import askopenfilename
+ - from tika import parser
+
+# Seperation of Work:
+- Jason worked on the trie.py file and coded the trie data structure as well as the main method in the __init__.py file
+- Srikar coded the GUI using Tkinter
+- Ani worked on the diagnostics.py file and coded all the functions as well as the get_file function in the __init__.py file
+
+# Goals:
+- All of our goals were met except for one: converting PDF and DOC to TXT
+    - We parse through the PDF, which isn't the same as converting the file, but it is just as effecient
+    - We aren't 100% sure it works, but we included it
 
 # Credits:
 This application uses Open Source components. You can find the source code of their open source projects along with license information below. We acknowledge and are grateful to these developers for their contributions to open source.
@@ -26,3 +37,8 @@ EnglishDictionary.txt:
 Project: english-words https://github.com/dwyl/english-words
 
 Copyright (c) 2018, Infochimps (https://web.archive.org/web/20131118073324/http://www.infochimps.com/datasets/word-list-350000-simple-english-words-excel-readable)
+
+Tkinter: https://pythonspot.com/tk-file-dialogs/
+
+
+3Parsing through pdf: https://medium.com/@justinboylantoomey/fast-text-extraction-with-python-and-tika-41ac34b0fe61
