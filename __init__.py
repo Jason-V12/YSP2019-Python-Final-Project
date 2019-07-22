@@ -1,7 +1,7 @@
 """SpellChecker Main file - creates instances of classes and calls methods from 
 helper files"""
 
-from tika import parser
+# from tika import parser
 import trie
 import interface
 from string import punctuation
@@ -40,15 +40,12 @@ def get_file():
             file_in = open(interface_instance.file_location, 'r')
             in_file = file_in.read()
             file_in.close()
-            # output_file = open("READ_IN.txt", "w")
-            # output_file.write(in_file)
-            # output_file.close()
             return in_file
-        elif file_type == "pdf":
+        """elif file_type == "pdf":
             file = 'path/to/file'
             file_data = parser.from_file(file)
             in_file = file_data['content']
-            return in_file
+            return in_file"""
         else:
             print("Please use a valid file type")
             return False
