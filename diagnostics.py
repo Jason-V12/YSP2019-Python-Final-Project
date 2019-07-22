@@ -1,9 +1,12 @@
 """Calculates diagnostic values and outputs to diagnostic file. Details application execution."""
 
-import time
+from time import time
+
+
 class Diagnostics(object):
-    def __init__(self):
-            
+    def __init__(self, code):
+        self.code = code
+
     def dict_word_count(self, fileName):
         file = open(fileName, 'r')
         f = file.read()
@@ -14,18 +17,18 @@ class Diagnostics(object):
         writeFile.write("There are " + str(count) + " in the dictionary")
         return count
     def dict_name(self, dicLocation):
-        index = repr(dicLocation.rfind('\\')) + 1 
-        dicName = dicLocation[index::]
+        dicName = dicLocation
         writeFile = open("log.txt", "w")
-        writeFile.write("There name of the dictionary is " + dicName)
+        writeFile.write("The name of the dictionary is " + dicName)
         return dicName
     def file_name(self, fileLocation):
-        index = repr(fileLocation.rfind('\\')) + 1 
-        fileName = fileLocation[index::]
+        fileName = fileLocation
         writeFile = open("log.txt", "w")
-        writeFile.write("There name of the file is " + dicName)
+        writeFile.write("The name of the file is " + fileName)
         return fileName
     def get_time(self):
         return time()
     def time_calculate(self, start, end):
         return (end - start)
+    def return_code(self):
+        return self.code
