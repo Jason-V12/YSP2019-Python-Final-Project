@@ -52,7 +52,7 @@ class DrawInterface(object):
         print(self.filedir)
     #param (none)
     def upload_file(self):
-        self.file = askopenfilename(title = "Choose a file:", filetypes = (("Text File", "*.txt")))
+        self.file = askopenfilename(title = "Choose a file:", filetypes = (("Text File", "*.txt"), ("PDF File","*.pdf"), ("Microsoft Word Document", "*.doc*")))
         try:
             filedir = open(self.file)
             filedir.read()
@@ -81,3 +81,4 @@ class DrawInterface(object):
             self.language = "German"
             self.curlang = Label(self.top, height = 40, width = 150, image = self.germanimage)
         self.curlang.place(x = 200, y = 360)
+
