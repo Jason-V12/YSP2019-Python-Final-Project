@@ -90,10 +90,3 @@ if __name__ == "__main__":
     print("Completed runtime in seconds: " + str(time() - complete_time))
     print("SUCCESS")
     print("Misspelled words located in file: MisspelledWords.txt")
-
-"""elif file_type == "pdf":
-        newFile = textract.process(fileLocation, method = "pdfminer")
-        file_in = file_in(newFile, 'r')
-    elif file_type == "doc":
-        newFile = textract.process(fileLocation, method = "antiword")
-        file_in = file_in(newFile, 'r')"""
