@@ -1,5 +1,5 @@
 # YSP2019-Python-Final-Project
-Repository for the SpellCheck final project in YSP Python 2019:
+Repository for the SpellChecker final project in YSP Python 2019:
 
   SpellChecker is a program that aids in checking a text file for spelling errors as efficiently as possible, and recommends similar words to those misspelled. It facilitates multiple languages and unicode characters, which can be chosen by the user. It allows users to upload certain file types for spell checking from their computer. After running, the program will produce a text file containing each misspelled word on a line, followed by suggestions for each word. 
 
