@@ -1,11 +1,10 @@
 """SpellChecker Main file - creates instances of classes and calls methods from 
 helper files"""
 
-# from tika import parser
 import trie
 import interface
+import diagnostics
 from string import punctuation
-from time import time
 
 
 # @param {}
@@ -16,10 +15,17 @@ def read_dict():
     language = interface_instance.language
     if language == "English":
         dictionary_option = "EnglishDictionary.txt"
+    elif language == "Spanish":
+        dictionary_option = "SpanishDictionary.txt"
+    elif language == "French":
+        dictionary_option = "FrenchDictionary.txt"
+    elif language == "German":
+        dictionary_option = "GermanDictionary.txt"
     else:
         dictionary_option = "EnglishDictionary.txt"
-    dictionary_option = dict_file = open(dictionary_option, "r")
+    dict_file = open(dictionary_option, "r")
     dict_in = dict_file.read()
+    diagnostics_instance.dict_name(dictionary_option)
     if dict_in == "":
         return False
     else:
@@ -40,12 +46,8 @@ def get_file():
             file_in = open(interface_instance.file_location, 'r')
             in_file = file_in.read()
             file_in.close()
+            diagnostics_instance.file_name(interface_instance.file_location)
             return in_file
-        """elif file_type == "pdf":
-            file = 'path/to/file'
-            file_data = parser.from_file(file)
-            in_file = file_data['content']
-            return in_file"""
         else:
             print("Please use a valid file type")
             return False
@@ -58,7 +60,8 @@ def get_file():
 
 
 if __name__ == "__main__":
-    complete_time = time()
+    diagnostics_instance = diagnostics.Diagnostics(5)
+    complete_time = diagnostics_instance.get_time()
     interface_instance = interface.DrawInterface()
     interface_instance.make_interface()
     print(interface_instance.language)
@@ -72,6 +75,7 @@ if __name__ == "__main__":
     input_file = input_file.replace("\n", " ")
     input_file = input_file.replace("\t", " ")
     input_file = (input_file.translate(str.maketrans('', '', punctuation))).split(" ")
+
     if not input_file:
         exit(3)
     dictionary = read_dict()
@@ -80,16 +84,20 @@ if __name__ == "__main__":
         exit(2)
     else:
         trie_instance.add_words()
-    spell_check_time = time()
+    spell_check_time = diagnostics_instance.get_time()
     miss_file = open("MisspelledWords.txt", "w")
+    miss_counter = 0
     for word in range(0, len(input_file)):
         if input_file[word] != "" and not input_file[word].isnumeric():
             result = trie_instance.check_word(input_file[word])
             if not result:
+                miss_counter = miss_counter + 1
                 miss_file.write(input_file[word] + ": " + str(result) + "   Similar: "
                                 + str(trie_instance.suggestions(input_file[word])) + "\n")
-    print("Spell Checking time in seconds: " + str(time() - spell_check_time))
+    print("Spell Checking time in seconds: "
+          + str(diagnostics_instance.time_calculate(spell_check_time, diagnostics_instance.get_time())))
     miss_file.close()
-    print("Completed runtime in seconds: " + str(time() - complete_time))
+    print("Completed runtime in seconds: " +
+          str(diagnostics_instance.time_calculate(complete_time, diagnostics_instance.get_time())))
     print("SUCCESS")
     print("Misspelled words located in file: MisspelledWords.txt")
