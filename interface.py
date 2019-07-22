@@ -52,7 +52,7 @@ class DrawInterface(object):
         print(self.filedir)
     #param (none)
     def upload_file(self):
-        self.file = askopenfilename(title = "Choose a file:", filetypes = (("Text File", "*.txt"), ("PDF File","*.pdf"), ("Microsoft Word Document", "*.doc*")))
+        self.file = askopenfilename(title = "Choose a file:", filetypes = (("Text File", "*.txt"))
         try:
             filedir = open(self.file)
             filedir.read()
