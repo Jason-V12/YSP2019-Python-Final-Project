@@ -1,0 +1,8 @@
+Modules Used:
+
+from string import punctuation
+from dataclasses import dataclass
+from time import time
+from tkinter import *
+from tkinter.filedialog import askopenfilename
+from tika import parser
